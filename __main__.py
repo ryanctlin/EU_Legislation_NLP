@@ -1,6 +1,6 @@
-from DroitHackChallenge.api_calls.stage_1 import getEntities_1
-from DroitHackChallenge.api_calls.stage_2 import getEntities_2
-from DroitHackChallenge.data.file_operations import write_json, read_json
+from EU_Legislation_NLP.api_calls.stage_1 import getEntities_1
+from EU_Legislation_NLP.api_calls.stage_2 import getEntities_2
+from EU_Legislation_NLP.data.file_operations import write_json, read_json
 import json
 
 def main():
