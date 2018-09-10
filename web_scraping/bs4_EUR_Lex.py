@@ -25,9 +25,8 @@ def scrape_contents(url):
         return result
 
 
-    else: #Return json containing None values
-        result = {"title": None, "text": None}
-        return result
+    else: #Throw value error
+        raise ValueError("Unsupported URL")
 
 
 

@@ -3,6 +3,7 @@ from EU_Legislation_NLP.api_calls.stage_1 import getEntities_1
 from EU_Legislation_NLP.api_calls.stage_2 import getEntities_2
 from EU_Legislation_NLP.data.file_operations import write_json, read_json
 import json
+import sys
 
 def main():
 
@@ -10,15 +11,24 @@ def main():
     url = input("Enter link to legislation on EUR-Lex: ")
 
     #TESTING DATA (use splice [500:800])
-    url = 'https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1536601415699&uri=CELEX:32018R0643'
+    #url = 'https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1536601415699&uri=CELEX:32018R0643'
 
 
     #--------------PHASE 1: Legislation Text Extraction---------------------------------------------------
-    legislation = scrape_contents(url)
+    #Obtain legislation title and text by calling scrape_contents()
+    try:
+        legislation = scrape_contents(url)
+
+    except ValueError:
+        #ValueError is thrown when input is not a supported EUR-Lex URL
+        print("Invalid URL")
+        sys.exit(-1)
 
     #Export and reload JSON data to 'data/legislation_webscrape.txt' for offline processing
     write_json(legislation, 'data/legislation_webscrape.txt')
     legislation = read_json('data/legislation_webscrape.txt')
+
+    #text = legislation["text"]
 
     text = legislation["text"][500:800] #Limit range for testing purposes
     # print(text) #Debugging purposes
